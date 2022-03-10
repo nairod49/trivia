@@ -22,10 +22,20 @@ public class Game {
 	LinkedList<Question> technologieQuestion = new LinkedList();
 
 	public Game(){
+
 		Scanner sc = new Scanner(System.in);
-		System.out.println("What is objective gold for win ? ");
-		String str = sc.nextLine();
-		goldWin = parseInt(str);
+		String str = "";
+		do {
+			sc = new Scanner(System.in);
+			if (goldWin<6){
+				System.out.println("more 6 please? ");
+			}else {
+				System.out.println("What is objective gold for win ? ");
+			}
+			str = sc.nextLine();
+			goldWin = parseInt(str);
+		}while(goldWin<6);
+
 
 		sc = new Scanner(System.in);
 		System.out.println("Voulez vous échangé la catégorie rock par une catégorie technologie ?(Y/N)");
