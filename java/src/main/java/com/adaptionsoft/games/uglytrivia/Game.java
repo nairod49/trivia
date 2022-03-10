@@ -176,7 +176,18 @@ public class Game {
 		return true;
 	}
 
+	public boolean useJoker(){
+		boolean verif = false;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Voulez vous utiliser un joker (Y/N) :");
+		String yesNo = sc.next();
 
+		if(yesNo.equals("Y")){
+			verif = true;
+		}
+
+		return verif;
+	}
 	private boolean didPlayerWin() {
 		return !(purses[currentPlayer] == goldWin);
 	}
