@@ -1,16 +1,30 @@
 package com.adaptionsoft.games.uglytrivia;
 import java.util.Scanner;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
 
 import static java.lang.Integer.parseInt;
 
 public class Game {
-	private final boolean Rock;
+
 	ArrayList<Player> players = new ArrayList();
+
+
+
+
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
+    public boolean Rock=false;
+
+	int popint=0;
+	int scienceint=0;
+	int sportint=0;
+	int rockint=0;
+	int techint=0;
+    
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 	int goldWin = 6;
@@ -23,10 +37,20 @@ public class Game {
 	LinkedList<Question> technologieQuestion = new LinkedList();
 
 	public Game(){
+
 		Scanner sc = new Scanner(System.in);
-		System.out.println("What is objective gold for win ? ");
-		String str = sc.nextLine();
-		goldWin = parseInt(str);
+		String str = "";
+		do {
+			sc = new Scanner(System.in);
+			if (goldWin<6){
+				System.out.println("more 6 please? ");
+			}else {
+				System.out.println("What is objective gold for win ? ");
+			}
+			str = sc.nextLine();
+			goldWin = parseInt(str);
+		}while(goldWin<6);
+
 
 		sc = new Scanner(System.in);
 		System.out.println("Voulez vous échangé la catégorie rock par une catégorie technologie ?(Y/N)");
@@ -55,6 +79,7 @@ public class Game {
 
 		return numberPlayerIsGood;
 	}
+
 	public boolean add(Player player) {
 	    players.add(player);
 	    places[howManyPlayers()] = 0;
@@ -72,24 +97,25 @@ public class Game {
 	}
 
 	public void roll(int roll) {
-		System.out.println(players.get(currentPlayer) + " is the current player");
+		System.out.println(players.get(currentPlayer).getName() + " is the current player");
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
 			if (roll % 2 != 0) {
 				isGettingOutOfPenaltyBox = true;
 				
-				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box");
 				inPenaltyBox[currentPlayer]=false;
 				places[currentPlayer] = places[currentPlayer] + roll;
-				if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+				if (places[currentPlayer] > 12) places[currentPlayer] = places[currentPlayer] - 13;
 				
-				System.out.println(players.get(currentPlayer) 
+				System.out.println(players.get(currentPlayer).getName()
 						+ "'s new location is " 
 						+ places[currentPlayer]);
+				System.out.println("The category is " + currentCategory());
 				askQuestion();
 			} else {
-				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+				System.out.println(players.get(currentPlayer).getName() + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
 				}
 			
@@ -98,30 +124,16 @@ public class Game {
 			places[currentPlayer] = places[currentPlayer] + roll;
 			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
 			
-			System.out.println(players.get(currentPlayer) 
+			System.out.println(players.get(currentPlayer).getName()
 					+ "'s new location is " 
 					+ places[currentPlayer]);
+			System.out.println("The category is " + currentCategory());
 			askQuestion();
 		}
 		
 	}
 
-	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Sports";
 
-		if (Rock==true)
-			return "Rock";
-		else
-			return "Technologie";
-	}
 
 	private void askQuestion() {
 		if (currentCategory() == "Pop")
@@ -134,6 +146,37 @@ public class Game {
 			System.out.println(rockQuestions.get(0).question);
 		if (currentCategory() == "Technologie" )
 			System.out.println(technologieQuestion.get(0).question);
+		}
+
+	
+	
+	private String currentCategory() {
+		if (places[currentPlayer] == 0) {popint++;
+			return "Pop";}
+		if (places[currentPlayer] == 4) {popint++;
+			return "Pop";}
+		if (places[currentPlayer] == 8) {popint++;
+			return "Pop";}
+		if (places[currentPlayer] == 1) {scienceint++;
+			return "Science";}
+		if (places[currentPlayer] == 5){scienceint++;
+			return "Science";}
+		if (places[currentPlayer] == 9) {scienceint++;
+			return "Science";}
+		if (places[currentPlayer] == 2) {sportint++;
+			return "Sports";}
+		if (places[currentPlayer] == 6) {sportint++;
+			return "Sports";}
+		if (places[currentPlayer] == 10) {sportint++;
+			return "Sports";}
+		
+		if (Rock==true)
+		{rockint++;
+			return "Rock";}
+		else
+		{techint++;
+			return "Technologie";}
+
 	}
 
 
@@ -147,7 +190,7 @@ public class Game {
 			this.gold = players.get(currentPlayer).getNbCorrectAnswerConsecutitve();
 			System.out.println("Answer was corrent!!!!");
 			purses[currentPlayer] = 1 + gold;
-			System.out.println(players.get(currentPlayer) 
+			System.out.println(players.get(currentPlayer).getName()
 					+ " now has "
 					+ purses[currentPlayer]
 					+ " Gold Coins.");
@@ -162,7 +205,7 @@ public class Game {
 	
 	public boolean wrongAnswer(){
 		System.out.println("Question was incorrectly answered");
-		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
+		System.out.println(players.get(currentPlayer).getName()+ " was sent to the penalty box");
 		inPenaltyBox[currentPlayer] = true;
 		this.gold = 0;
 		players.get(currentPlayer).nbCorrectAnswerConsecutive = 0;
@@ -173,6 +216,15 @@ public class Game {
 
 
 	private boolean didPlayerWin() {
+		System.out.println("pop a été choisi "+popint);
+		System.out.println("science a été choisi "+scienceint);
+		System.out.println("sport a été choisi "+sportint);
+		if (Rock==true){
+			System.out.println("rock a été choisi "+rockint);
+		}
+		else
+		System.out.println("technologie a été choisi "+techint);
+		
 		return !(purses[currentPlayer] == goldWin);
 	}
 }
