@@ -11,7 +11,9 @@ public class GameRunner {
 
 	public static void main(String[] args) {
 		Game aGame = new Game();
-		
+
+		aGame.add("Chet");
+		aGame.add("Chet");
 		aGame.add("Chet");
 
 		if(aGame.verif()){
