@@ -68,7 +68,9 @@ public class Game {
 	}
 
 	private Question askQuestion() {
-		return new Question();
+		int idQuestion = this.askQuestion().idQuestion;
+		Category questionCategory = this.askQuestion().getQuestionCategory();
+		return new Question(idQuestion, questionCategory);
 	}
 
 	public boolean wasCorrectlyAnswered() {
