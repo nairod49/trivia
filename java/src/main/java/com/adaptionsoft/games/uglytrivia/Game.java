@@ -23,7 +23,13 @@ public class Game {
 	int sportint2=0;
 	int rockint2=0;
 	int techint2=0;
-    
+
+	int popint=0;
+	int scienceint=0;
+	int sportint=0;
+	int rockint=0;
+	int techint=0;
+
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 	int goldWin = 6;
@@ -155,7 +161,7 @@ public class Game {
 		}
 
 	
-	
+
 	private String currentCategory() {
 		if (places[currentPlayer] == 0) {popint++;
 			return "Pop";}
