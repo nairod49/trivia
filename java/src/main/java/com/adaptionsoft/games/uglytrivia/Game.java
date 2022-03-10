@@ -1,5 +1,6 @@
 package com.adaptionsoft.games.uglytrivia;
 import java.util.Scanner;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
