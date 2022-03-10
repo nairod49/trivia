@@ -1,34 +1,51 @@
 package com.adaptionsoft.games.uglytrivia;
-
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
     ArrayList players = new ArrayList();
-    int[] places = new int[100];
-    int[] purses  = new int[100];
-    boolean[] inPenaltyBox  = new boolean[100];
-    
+
+
+    int[] places = new int[6];
+    int[] purses  = new int[6];
+    boolean[] inPenaltyBox  = new boolean[6];
+    public boolean Rock=false;
+
+
+
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
+	LinkedList technologieQuestion = new LinkedList();
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
     
     public  Game(){
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Voulez vous échangé la catégorie rock par une catégorie technologie ?(Y/N)");
+		String str = sc.nextLine();
+		Rock=str.equalsIgnoreCase("n" ) ? true : false;
+		
+
+		 
+		
+
     	for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
-			rockQuestions.addLast(createRockQuestion(i));
+			if(Rock==true)
+			rockQuestions.addLast(("Rocks Question " + i));
+			else 
+			technologieQuestion.addLast(("Technologies Question " +i));
     	}
     }
 
-	public String createRockQuestion(int index){
-		return "Rock Question " + index;
-	}
+	
 	
 	public boolean isPlayable() {
 		return (howManyPlayers() >= 2);
@@ -103,8 +120,10 @@ public class Game {
 			System.out.println(scienceQuestions.removeFirst());
 		if (currentCategory() == "Sports")
 			System.out.println(sportsQuestions.removeFirst());
-		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+		if (currentCategory() == "Rock" )
+			System.out.println(rockQuestions.removeFirst());
+		if (currentCategory() == "Technologie" )
+			System.out.println(technologieQuestion.removeFirst());		
 	}
 	
 	
@@ -118,7 +137,11 @@ public class Game {
 		if (places[currentPlayer] == 2) return "Sports";
 		if (places[currentPlayer] == 6) return "Sports";
 		if (places[currentPlayer] == 10) return "Sports";
+		
+		if (Rock==true)
 		return "Rock";
+		else
+		 return "Technologie";
 	}
 
 	public boolean wasCorrectlyAnswered() {
