@@ -104,6 +104,23 @@ public class Game {
 		
 	}
 
+	private String currentCategory() {
+		if (places[currentPlayer] == 0) return "Pop";
+		if (places[currentPlayer] == 4) return "Pop";
+		if (places[currentPlayer] == 8) return "Pop";
+		if (places[currentPlayer] == 1) return "Science";
+		if (places[currentPlayer] == 5) return "Science";
+		if (places[currentPlayer] == 9) return "Science";
+		if (places[currentPlayer] == 2) return "Sports";
+		if (places[currentPlayer] == 6) return "Sports";
+		if (places[currentPlayer] == 10) return "Sports";
+
+		if (Rock==true)
+			return "Rock";
+		else
+			return "Technologie";
+	}
+
 	private void askQuestion() {
 		if (currentCategory() == "Pop")
 			System.out.println(popQuestions.get(0).question);
@@ -116,16 +133,7 @@ public class Game {
 		if (currentCategory() == "Technologie" )
 			System.out.println(technologieQuestion.get(0).question);
 	}
-	private Question askQuestion() {
 
-		int idCategory = 0;
-		String typeCategory = "sport";
-		int idQuestion = 0;
-
-		Category questionCategory = new Category(idCategory, typeCategory);
-		Question question = new Question(idQuestion, questionCategory,"");
-		return question;
-	}
 
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
