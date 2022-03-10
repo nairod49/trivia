@@ -98,12 +98,10 @@ public class Game {
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
-			if (roll % (2+players.get(currentPlayer).nbTurnInJail) != 0) {
+			if (roll % (2 + players.get(currentPlayer).nbTurnInJail) != 0) {
 				isGettingOutOfPenaltyBox = true;
 
-				players.get(currentPlayer).nbTurnInJail = 0;
-
-				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box");
+				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box after ");
 				inPenaltyBox[currentPlayer]=false;
 				places[currentPlayer] = places[currentPlayer] + roll;
 				if (places[currentPlayer] > 12) places[currentPlayer] = places[currentPlayer] - 13;
@@ -182,7 +180,7 @@ public class Game {
 		} else {
 
 			this.gold = players.get(currentPlayer).getNbCorrectAnswerConsecutitve();
-			System.out.println("Answer was corrent!!!!");
+			System.out.println("Answer was correct!!!!");
 			purses[currentPlayer] = 1 + gold;
 			System.out.println(players.get(currentPlayer).getName()
 					+ " now has "
