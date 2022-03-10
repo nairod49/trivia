@@ -26,6 +26,22 @@ public class GameRunner {
 			Random rand = new Random();
 			do {
 				aGame.roll(rand.nextInt(5) + 1);
+					if (rand.nextInt(9) == 7) {
+						if (!aGame.useJoker()) {
+							notAWinner = aGame.wrongAnswer();
+						}
+					} else {
+						notAWinner = aGame.wasCorrectlyAnswered();
+					}
+			
+			} while (notAWinner);
+		}else{
+			System.out.println("Number of player is not correct");
+		}
+		/*if(aGame.verif()){
+			Random rand = new Random();
+			do {
+				aGame.roll(rand.nextInt(5) + 1);
 				Scanner sc = new Scanner(System.in);
 				System.out.println("Repondre 1 quitter 2");
 				 continuer = sc.next();
@@ -43,7 +59,7 @@ public class GameRunner {
 			} while (notAWinner);
 		}else{
 			System.out.println("Number of player is not correct");
-		}
+		}*/
 		
 	}
 }

@@ -24,11 +24,7 @@ public class Game {
 	int rockint2=0;
 	int techint2=0;
 
-	int popint=0;
-	int scienceint=0;
-	int sportint=0;
-	int rockint=0;
-	int techint=0;
+	
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -163,30 +159,30 @@ public class Game {
 	
 
 	private String currentCategory() {
-		if (places[currentPlayer] == 0) {popint++;
+		if (places[currentPlayer] == 0) {players.get(currentPlayer).incpop();
 			return "Pop";}
-		if (places[currentPlayer] == 4) {popint++;
+		if (places[currentPlayer] == 4) {players.get(currentPlayer).incpop();
 			return "Pop";}
-		if (places[currentPlayer] == 8) {popint++;
+		if (places[currentPlayer] == 8) {players.get(currentPlayer).incpop();
 			return "Pop";}
-		if (places[currentPlayer] == 1) {scienceint++;
+		if (places[currentPlayer] == 1) {players.get(currentPlayer).incscience();
 			return "Science";}
-		if (places[currentPlayer] == 5){scienceint++;
+		if (places[currentPlayer] == 5){players.get(currentPlayer).incscience();
 			return "Science";}
-		if (places[currentPlayer] == 9) {scienceint++;
+		if (places[currentPlayer] == 9) {players.get(currentPlayer).incscience();
 			return "Science";}
-		if (places[currentPlayer] == 2) {sportint++;
+		if (places[currentPlayer] == 2) {players.get(currentPlayer).incsport();
 			return "Sports";}
-		if (places[currentPlayer] == 6) {sportint++;
+		if (places[currentPlayer] == 6) {players.get(currentPlayer).incsport();
 			return "Sports";}
-		if (places[currentPlayer] == 10) {sportint++;
+		if (places[currentPlayer] == 10) {players.get(currentPlayer).incsport();
 			return "Sports";}
 		
 		if (Rock==true)
-		{rockint++;
+		{players.get(currentPlayer).incrock();
 			return "Rock";}
 		else
-		{techint++;
+		{players.get(currentPlayer).inctech();
 			return "Technologie";}
 
 	}
@@ -241,10 +237,32 @@ public class Game {
 		return verif;
 	}
 	private boolean didPlayerWin() {
+		if(purses[currentPlayer] == goldWin){
+			
+			affichage_categorie();
+			
+			return false;
+		}
+		else return true;
 		
 		
-		return !(purses[currentPlayer] == goldWin);
 	}
+
+	public void affichage_categorie(){
+		int val= players.size();
+
+		for (int i=0;i<val;i++){
+			System.out.println(players.get(i).getName());
+			System.out.println("Pop: "+ players.get(i).getpop());
+			System.out.println("Science: "+ players.get(i).getscience());
+			System.out.println("Sport: "+ players.get(i).getsport());
+			System.out.println("Rock: "+ players.get(i).getrock());
+			System.out.println("Tech: "+ players.get(i).gettec());
+		}
+
+	}
+
+
 
 	public Boolean leave(){
 		boolean finish = true;
