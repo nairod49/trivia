@@ -7,13 +7,14 @@ import static java.lang.Integer.parseInt;
 
 public class Game {
 	private final boolean Rock;
-	ArrayList players = new ArrayList();
+	ArrayList<Player> players = new ArrayList();
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 	int goldWin = 6;
+	int gold;
 
 	LinkedList<Question> popQuestions = new LinkedList();
 	LinkedList<Question> scienceQuestions = new LinkedList();
@@ -54,13 +55,14 @@ public class Game {
 
 		return numberPlayerIsGood;
 	}
-	public boolean add(String playerName) {
-	    players.add(playerName);
+	public boolean add(Player player) {
+	    players.add(player);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
 	    
-	    System.out.println(playerName + " was added");
+	    System.out.println(player.getName().toString()5
+				+ " was added");
 	    System.out.println("They are player number " + players.size());
 		return true;
 	}
@@ -141,9 +143,10 @@ public class Game {
 				if (currentPlayer == players.size()) currentPlayer = 0;
 				return true;
 		} else {
-		
+
+			this.gold = players.get(currentPlayer).getNbCorrectAnswerConsecutitve();
 			System.out.println("Answer was corrent!!!!");
-			purses[currentPlayer]++;
+			purses[currentPlayer] = 1 + gold;
 			System.out.println(players.get(currentPlayer) 
 					+ " now has "
 					+ purses[currentPlayer]
@@ -161,6 +164,8 @@ public class Game {
 		System.out.println("Question was incorrectly answered");
 		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
 		inPenaltyBox[currentPlayer] = true;
+		this.gold = 0;
+		players.get(currentPlayer).nbCorrectAnswerConsecutive = 0;
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
 		return true;

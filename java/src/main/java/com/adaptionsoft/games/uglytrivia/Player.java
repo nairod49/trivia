@@ -5,6 +5,8 @@ public class Player {
     private int age;
     private int score;
     private int totalScore;
+    public int nbCorrectAnswerConsecutive = 0;
+
 
     public Player(String name, String pseudo, int age, int score){
         this.name = name;
@@ -52,5 +54,10 @@ public class Player {
     public int scoreTotal (){
         this.totalScore = getScore() + 1;
         return this.totalScore;
+    }
+    public int getNbCorrectAnswerConsecutitve(){
+        this.nbCorrectAnswerConsecutive++;
+        return this.nbCorrectAnswerConsecutive;
+
     }
 }
