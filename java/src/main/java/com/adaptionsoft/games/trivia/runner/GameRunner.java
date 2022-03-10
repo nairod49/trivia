@@ -16,7 +16,6 @@ public class GameRunner {
 		aGame.add("Chet 2");
 		if(aGame.verif()){
 			Random rand = new Random();
-
 			do {
 				aGame.roll(rand.nextInt(5) + 1);
 
@@ -25,9 +24,6 @@ public class GameRunner {
 				} else {
 					notAWinner = aGame.wasCorrectlyAnswered();
 				}
-
-			
-
 			} while (notAWinner);
 		}else{
 			System.out.println("Number of player is not correct");
