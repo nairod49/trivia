@@ -15,6 +15,12 @@ public class Game {
     boolean isGettingOutOfPenaltyBox;
 	int goldWin = 6;
 
+	LinkedList popQuestions = new LinkedList();
+	LinkedList scienceQuestions = new LinkedList();
+	LinkedList sportsQuestions = new LinkedList();
+	LinkedList rockQuestions = new LinkedList();
+	LinkedList technologieQuestion = new LinkedList();
+
 	public Game(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("What is objective gold for win ? ");
@@ -26,6 +32,15 @@ public class Game {
 		str = sc.nextLine();
 		Rock = str.equalsIgnoreCase("n" ) ? true : false;
 
+		for (int i = 0; i < 50; i++) {
+			popQuestions.addLast(new Question(i,new Category(i,"Pop"),"Pop Question " + i));
+			scienceQuestions.addLast(new Question(i,new Category(i,"Science"),"Science Question " + i));
+			sportsQuestions.addLast(new Question(i,new Category(i,"Sports"),"Sports Question " + i));
+			if(Rock==true)
+				rockQuestions.addLast(new Question(i,new Category(i,"Rocks"),"Rocks Question " + i));
+			else
+				technologieQuestion.addLast(new Question(i,new Category(i,"Technologies"),"Technologies Question " +i));
+		}
 	}
 	public boolean isPlayable() {
 		return (howManyPlayers() >= 2);
@@ -96,7 +111,7 @@ public class Game {
 		int idQuestion = 0;
 
 		Category questionCategory = new Category(idCategory, typeCategory);
-		Question question = new Question(idQuestion, questionCategory);
+		Question question = new Question(idQuestion, questionCategory,"");
 		return question;
 	}
 
