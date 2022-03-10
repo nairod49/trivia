@@ -160,8 +160,6 @@ public class Game {
 
 		}
 
-	
-
 	private String currentCategory() {
 		if (places[currentPlayer] == 0) {popint++;
 			return "Pop";}
@@ -241,17 +239,24 @@ public class Game {
 		return verif;
 	}
 	private boolean didPlayerWin() {
-		
-		
 		return !(purses[currentPlayer] == goldWin);
 	}
 
 	public Boolean leave(){
 		boolean finish = true;
+		System.out.println(players.get(currentPlayer).getName() + " leave");
 		players.remove(currentPlayer);
 		if (players.size()==1){
 			finish = false;
+			for (Player player:  players
+				 ) {
+				System.out.println(player.getName() + " you win");
+			}
+
 		}
 		return finish;
+	}
+	public String currentPlayer(){
+		return players.get(currentPlayer).getName();
 	}
 }

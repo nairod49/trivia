@@ -27,7 +27,7 @@ public class GameRunner {
 			do {
 				aGame.roll(rand.nextInt(5) + 1);
 				Scanner sc = new Scanner(System.in);
-				System.out.println("Repondre 1 quitter 2");
+				System.out.println(aGame.currentPlayer() + " voulez vous Repondre 1 ou quitter 2");
 				 continuer = sc.next();
 				if(!continuer.equals("2")) {
 					if (rand.nextInt(9) == 7) {
