@@ -61,7 +61,7 @@ public class Game {
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
 	    
-	    System.out.println(player.getName().toString()5
+	    System.out.println(player.getName().toString()
 				+ " was added");
 	    System.out.println("They are player number " + players.size());
 		return true;
