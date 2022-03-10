@@ -26,15 +26,21 @@ public class Game {
     boolean isGettingOutOfPenaltyBox;
 	int goldWin = 6;
 
+	Category catRpzPlaceJoueurOuIdDonneParPerdnant;
+
 	LinkedList<Question> popQuestions = new LinkedList();
 	LinkedList<Question> scienceQuestions = new LinkedList();
 	LinkedList<Question> sportsQuestions = new LinkedList();
 	LinkedList<Question> rockQuestions = new LinkedList();
 	LinkedList<Question> technologieQuestion = new LinkedList();
 
+	boolean precedentJoueurAPerdu = false;
+
+	Scanner sc;
+
 	public Game(){
 
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		String str = "";
 		do {
 			sc = new Scanner(System.in);
@@ -77,7 +83,7 @@ public class Game {
 	}
 	public boolean add(String playerName) {
 
-		
+
 	    players.add(playerName);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
@@ -108,7 +114,7 @@ public class Game {
 				System.out.println(players.get(currentPlayer) 
 						+ "'s new location is " 
 						+ places[currentPlayer]);
-				System.out.println("The category is " + currentCategory());
+				System.out.println("The category is " + retournerCategorieQuestion(places[currentPlayer]).typeCategory);
 				askQuestion();
 			} else {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
@@ -123,55 +129,134 @@ public class Game {
 			System.out.println(players.get(currentPlayer) 
 					+ "'s new location is " 
 					+ places[currentPlayer]);
-			System.out.println("The category is " + currentCategory());
-			askQuestion();
+			// if this.precedentJoueurAPerdu = true;
+			//int x = entierPermettantDeChoisirLaQuestion
+			if(precedentJoueurAPerdu){
+
+				catRpzPlaceJoueurOuIdDonneParPerdnant = askLoser();
+			}
+			else{
+				// catRpzPlaceJoueurOuIdDonneParPerdnant =
+				catRpzPlaceJoueurOuIdDonneParPerdnant = retournerCategorieQuestion(places[currentPlayer]);
+			}
+			System.out.println("The category is " + catRpzPlaceJoueurOuIdDonneParPerdnant.typeCategory);
+			// useless
+			// askQuestion();
 		}
 		
 	}
 
 
 
-	private void askQuestion() {
-		if (currentCategory() == "Pop")
-			System.out.println(popQuestions.get(0).question);
-		if (currentCategory() == "Science")
-			System.out.println(scienceQuestions.get(0).question);
-		if (currentCategory() == "Sports")
-			System.out.println(sportsQuestions.get(0).question);
-		if (currentCategory() == "Rock" )
-			System.out.println(rockQuestions.get(0).question);
-		if (currentCategory() == "Technologie" )
-			System.out.println(technologieQuestion.get(0).question);
+	private void  askQuestion() {
+
+	}
+
+	public Category askLoser(){
+
+		Category categorie  = new Category(0, "");
+
+
+
+			sc = new Scanner(System.in);
+			String newLine = System.getProperty("line.separator");
+			System.out.println("What is the kind of the next question?  " + newLine+ " pop: 1 "+ newLine +" science: 2 "+ newLine + " sport: 3 ");
+			String str = sc.nextLine();
+
+			int switchCase=Integer.parseInt(str);
+
+			switch(switchCase) {
+
+				case 1:
+					categorie.setIdCategory(0);
+					categorie.setTypeCategory("Pop");
+					break;
+
+				case 2:
+					categorie.setIdCategory(1);
+					categorie.setTypeCategory("Science");
+					break;
+
+				case 3:
+					categorie.setIdCategory(2);
+					categorie.setTypeCategory("Sport");
+					break;
+
+
+			}
+			precedentJoueurAPerdu = false;
+
+
+		return categorie;
+	}
+
+	public Category retournerCategorieQuestion(int EntierRepresentantLAPacedeLUser){
+
+		Category categorie  = new Category(0, "");
+
+
+
+		switch(EntierRepresentantLAPacedeLUser){
+
+			case 0:
+				categorie.setIdCategory(0);
+				categorie.setTypeCategory("Pop");
+				break;
+
+			case 1:
+				categorie.setIdCategory(1);
+				categorie.setTypeCategory("Science");
+				break;
+
+			case 2:
+				categorie.setIdCategory(2);
+				categorie.setTypeCategory("Sport");
+				break;
+
+			case 3:
+				categorie.setIdCategory(3);
+				categorie.setTypeCategory("Pop");
+				break;
+
+			case 4:
+				categorie.setIdCategory(4);
+				categorie.setTypeCategory("Science");
+				break;
+
+			case 5:
+				categorie.setIdCategory(5);
+				categorie.setTypeCategory("Sport");
+				break;
+			case 6:
+				categorie.setIdCategory(6);
+				categorie.setTypeCategory("Pop");
+				break;
+			case 7:
+				categorie.setIdCategory(7);
+				categorie.setTypeCategory("Science");
+				break;
+			case 8:
+				categorie.setIdCategory(8);
+				categorie.setTypeCategory("Sport");
+				break;
+			case 9:
+				categorie.setIdCategory(9);
+				categorie.setTypeCategory("Pop");
+				break;
+			case 10:
+				categorie.setIdCategory(10);
+				categorie.setTypeCategory("Science");
+				break;
+			case 11:
+				categorie.setIdCategory(11);
+				categorie.setTypeCategory("Sport");
+				break;
+			default:
+				System.out.println("place superieur à 11");
+				break;
 		}
 
-	
-	
-	private String currentCategory() {
-		if (places[currentPlayer] == 0) {popint++;
-			return "Pop";}
-		if (places[currentPlayer] == 4) {popint++;
-			return "Pop";}
-		if (places[currentPlayer] == 8) {popint++;
-			return "Pop";}
-		if (places[currentPlayer] == 1) {scienceint++;
-			return "Science";}
-		if (places[currentPlayer] == 5){scienceint++;
-			return "Science";}
-		if (places[currentPlayer] == 9) {scienceint++;
-			return "Science";}
-		if (places[currentPlayer] == 2) {sportint++;
-			return "Sports";}
-		if (places[currentPlayer] == 6) {sportint++;
-			return "Sports";}
-		if (places[currentPlayer] == 10) {sportint++;
-			return "Sports";}
-		
-		if (Rock==true)
-		{rockint++;
-			return "Rock";}
-		else
-		{techint++;
-			return "Technologie";}
+		return  categorie;
 
 	}
 
@@ -205,6 +290,9 @@ public class Game {
 		
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
+
+		this.precedentJoueurAPerdu = true;
+
 		return true;
 	}
 
@@ -221,4 +309,6 @@ public class Game {
 		
 		return !(purses[currentPlayer] == goldWin);
 	}
+
+
 }
