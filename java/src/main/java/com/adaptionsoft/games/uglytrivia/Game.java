@@ -15,11 +15,11 @@ public class Game {
     boolean isGettingOutOfPenaltyBox;
 	int goldWin = 6;
 
-	LinkedList popQuestions = new LinkedList();
-	LinkedList scienceQuestions = new LinkedList();
-	LinkedList sportsQuestions = new LinkedList();
-	LinkedList rockQuestions = new LinkedList();
-	LinkedList technologieQuestion = new LinkedList();
+	LinkedList<Question> popQuestions = new LinkedList();
+	LinkedList<Question> scienceQuestions = new LinkedList();
+	LinkedList<Question> sportsQuestions = new LinkedList();
+	LinkedList<Question> rockQuestions = new LinkedList();
+	LinkedList<Question> technologieQuestion = new LinkedList();
 
 	public Game(){
 		Scanner sc = new Scanner(System.in);
@@ -104,8 +104,20 @@ public class Game {
 		
 	}
 
-
+	private void askQuestion() {
+		if (currentCategory() == "Pop")
+			System.out.println(popQuestions.get(0).question);
+		if (currentCategory() == "Science")
+			System.out.println(scienceQuestions.get(0).question);
+		if (currentCategory() == "Sports")
+			System.out.println(sportsQuestions.get(0).question);
+		if (currentCategory() == "Rock" )
+			System.out.println(rockQuestions.get(0).question);
+		if (currentCategory() == "Technologie" )
+			System.out.println(technologieQuestion.get(0).question);
+	}
 	private Question askQuestion() {
+
 		int idCategory = 0;
 		String typeCategory = "sport";
 		int idQuestion = 0;
