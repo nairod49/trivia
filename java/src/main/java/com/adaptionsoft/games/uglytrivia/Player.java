@@ -1,16 +1,15 @@
 package com.adaptionsoft.games.uglytrivia;
 
 public class Player {
-    private  String name, pseudo;
-    private int age;
+    private String name;
     private int score;
     private int totalScore;
+    private int correctAnswerConsecutive;
 
-    public Player(String name, String pseudo, int age, int score){
+    public Player(String name, int score, int correctAnswerConsecutive){
         this.name = name;
-        this.pseudo = pseudo;
-        this.age = age;
         this.score = score;
+        this.correctAnswerConsecutive = correctAnswerConsecutive;
     }
 
     public String getName() {
@@ -21,28 +20,20 @@ public class Player {
         this.name = name;
     }
 
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public int getScore() {
         return score;
     }
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getCorrectAnswerConsecutive() {
+        return correctAnswerConsecutive;
+    }
+
+    public void setCorrectAnswerConsecutive(int correctAnswerConsecutive) {
+        this.correctAnswerConsecutive = correctAnswerConsecutive;
     }
 
     /**
