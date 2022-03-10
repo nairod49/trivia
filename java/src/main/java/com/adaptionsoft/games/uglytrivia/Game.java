@@ -11,9 +11,6 @@ public class Game {
 
 	ArrayList<Player> players = new ArrayList();
 
-
-
-
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
@@ -101,9 +98,11 @@ public class Game {
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
-			if (roll % 2 != 0) {
+			if (roll % (2+players.get(currentPlayer).nbTurnInJail) != 0) {
 				isGettingOutOfPenaltyBox = true;
-				
+
+				players.get(currentPlayer).nbTurnInJail = 0;
+
 				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box");
 				inPenaltyBox[currentPlayer]=false;
 				places[currentPlayer] = places[currentPlayer] + roll;
@@ -117,6 +116,7 @@ public class Game {
 			} else {
 				System.out.println(players.get(currentPlayer).getName() + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
+				players.get(currentPlayer).getNbTurnInJail();
 				}
 			
 		} else {
@@ -133,8 +133,6 @@ public class Game {
 		
 	}
 
-
-
 	private void askQuestion() {
 		if (currentCategory() == "Pop")
 			System.out.println(popQuestions.get(0).question);
@@ -147,8 +145,6 @@ public class Game {
 		if (currentCategory() == "Technologie" )
 			System.out.println(technologieQuestion.get(0).question);
 		}
-
-	
 	
 	private String currentCategory() {
 		if (places[currentPlayer] == 0) {popint++;
@@ -176,9 +172,7 @@ public class Game {
 		else
 		{techint++;
 			return "Technologie";}
-
 	}
-
 
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
@@ -208,12 +202,12 @@ public class Game {
 		System.out.println(players.get(currentPlayer).getName()+ " was sent to the penalty box");
 		inPenaltyBox[currentPlayer] = true;
 		this.gold = 0;
+
 		players.get(currentPlayer).nbCorrectAnswerConsecutive = 0;
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
 		return true;
 	}
-
 
 	private boolean didPlayerWin() {
 		System.out.println("pop a été choisi "+popint);
