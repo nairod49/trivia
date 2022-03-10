@@ -33,7 +33,15 @@ public class Game {
 	public boolean isPlayable() {
 		return (howManyPlayers() >= 2);
 	}
+	public boolean verif() {
+		boolean numberPlayerIsGood = true;
 
+		if(howManyPlayers()<2 || howManyPlayers()>6){
+			numberPlayerIsGood = false;
+		}
+
+		return numberPlayerIsGood;
+	}
 	public boolean add(String playerName) {
 		
 		
