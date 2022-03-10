@@ -3,14 +3,30 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static java.lang.Integer.parseInt;
+
 public class Game {
-    ArrayList players = new ArrayList();
+	private final boolean Rock;
+	ArrayList players = new ArrayList();
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
-	
+	int goldWin = 6;
+
+	public Game(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("What is objective gold for win ? ");
+		String str = sc.nextLine();
+		goldWin = parseInt(str);
+
+		sc = new Scanner(System.in);
+		System.out.println("Voulez vous échangé la catégorie rock par une catégorie technologie ?(Y/N)");
+		str = sc.nextLine();
+		Rock = str.equalsIgnoreCase("n" ) ? true : false;
+
+	}
 	public boolean isPlayable() {
 		return (howManyPlayers() >= 2);
 	}
@@ -117,6 +133,6 @@ public class Game {
 
 
 	private boolean didPlayerWin() {
-		return !(purses[currentPlayer] == 10);
+		return !(purses[currentPlayer] == goldWin);
 	}
 }
