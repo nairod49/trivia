@@ -6,6 +6,7 @@ public class Player {
     private int score;
     private int totalScore;
     public int nbCorrectAnswerConsecutive = 0;
+    public int joker = 1;
 
 
     public Player(String name, String pseudo, int age, int score){
@@ -56,8 +57,10 @@ public class Player {
         return this.totalScore;
     }
     public int getNbCorrectAnswerConsecutitve(){
+
         this.nbCorrectAnswerConsecutive++;
         return this.nbCorrectAnswerConsecutive;
+
 
     }
 }

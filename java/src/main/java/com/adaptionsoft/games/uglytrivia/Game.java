@@ -136,15 +136,17 @@ public class Game {
 
 
 	private void askQuestion() {
-		if (currentCategory() == "Pop")
+		if (currentCategory() == "Pop") {
 			System.out.println(popQuestions.get(0).question);
-		if (currentCategory() == "Science")
+		}else if (currentCategory() == "Science") {
 			System.out.println(scienceQuestions.get(0).question);
-		if (currentCategory() == "Sports")
+		}else if (currentCategory() == "Sports") {
 			System.out.println(sportsQuestions.get(0).question);
-		if (currentCategory() == "Rock" )
+		}
+		else if (currentCategory() == "Rock" ){
 			System.out.println(rockQuestions.get(0).question);
-		if (currentCategory() == "Technologie" )
+		}
+		else if (currentCategory() == "Technologie" )
 			System.out.println(technologieQuestion.get(0).question);
 		}
 
@@ -189,7 +191,7 @@ public class Game {
 
 			this.gold = players.get(currentPlayer).getNbCorrectAnswerConsecutitve();
 			System.out.println("Answer was corrent!!!!");
-			purses[currentPlayer] = 1 + gold;
+			purses[currentPlayer] = purses[currentPlayer] + this.gold;
 			System.out.println(players.get(currentPlayer).getName()
 					+ " now has "
 					+ purses[currentPlayer]
@@ -216,14 +218,16 @@ public class Game {
 
 	public boolean useJoker(){
 		boolean verif = false;
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Voulez vous utiliser un joker (Y/N) :");
-		String yesNo = sc.next();
+		if(players.get(currentPlayer).joker == 1) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Voulez vous utiliser un joker (Y/N) :");
+			String yesNo = sc.next();
 
-		if(yesNo.equals("Y")){
-			verif = true;
+			if (yesNo.equals("Y")) {
+				verif = true;
+				players.get(currentPlayer).joker = 0;
+			}
 		}
-
 		return verif;
 	}
 	private boolean didPlayerWin() {
@@ -237,5 +241,14 @@ public class Game {
 		System.out.println("technologie a été choisi "+techint);
 		
 		return !(purses[currentPlayer] == goldWin);
+	}
+
+	public Boolean leave(){
+		boolean finish = true;
+		players.remove(currentPlayer);
+		if (players.size()==1){
+			finish = false;
+		}
+		return finish;
 	}
 }
