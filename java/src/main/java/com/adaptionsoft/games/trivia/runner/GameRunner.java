@@ -13,7 +13,7 @@ public class GameRunner {
 		Game aGame = new Game();
 
 		aGame.add("Chet");
-
+		aGame.add("Chet 2");
 		if(aGame.verif()){
 			Random rand = new Random();
 
