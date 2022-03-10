@@ -10,13 +10,11 @@ public class Plateau {
 
 
     public Plateau(ArrayList<Integer> listOfCruentPlayerPlace , ArrayList<Player> listOfPlayer ) {
-        this.listOfCurrentPlayerPlace = listOfCruentPlayerPlace;
-        for (int i= 0 ; i < this.listOfCurrentPlayerPlace.size() ; i ++){
+        //this.listOfCurrentPlayerPlace.size() = listOfCruentPlayerPlace.size();
 
-            this.listOfCurrentPlayerPlace.set(i, 0);
+        for(int i = 0;  i < listOfPlayer.size() ; i ++){
+            listOfCurrentPlayerPlace.add(0);
         }
-
-
     }
 
 }
