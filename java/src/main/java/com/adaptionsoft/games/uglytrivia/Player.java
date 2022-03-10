@@ -5,12 +5,54 @@ public class Player {
     private int age;
     private int score;
     private int totalScore;
+    int popint=0;
+	int scienceint=0;
+	int sportint=0;
+	int rockint=0;
+	int techint=0;
 
     public Player(String name, String pseudo, int age, int score){
         this.name = name;
         this.pseudo = pseudo;
         this.age = age;
         this.score = score;
+        this.popint =0;
+        this.scienceint=0;
+        this.sportint=0;
+        this.rockint=0;
+        this.techint=0;
+    }
+
+    public int getpop(){
+        return this.popint;
+    }
+    public int getscience(){
+        return this.scienceint;
+    }
+    public int getsport(){
+        return this.sportint;
+    }
+    public int getrock(){
+        return this.rockint;
+    }
+
+    public int gettec(){
+        return this.techint;
+    }
+    public void incpop(){
+        this.popint++;
+    }
+    public void incscience(){
+        this.scienceint++;
+    }
+    public void incsport(){
+        this.sportint++;
+    }
+    public void incrock(){
+        this.rockint++;
+    }
+    public void inctech(){
+        this.techint++;
     }
 
     public String getName() {

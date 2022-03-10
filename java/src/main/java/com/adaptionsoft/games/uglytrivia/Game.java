@@ -15,11 +15,11 @@ public class Game {
     boolean[] inPenaltyBox  = new boolean[6];
     public boolean Rock=false;
 
-	int popint=0;
-	int scienceint=0;
-	int sportint=0;
-	int rockint=0;
-	int techint=0;
+	int popint2=0;
+	int scienceint2=0;
+	int sportint2=0;
+	int rockint2=0;
+	int techint2=0;
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -131,16 +131,22 @@ public class Game {
 
 
 	private void askQuestion() {
-		if (currentCategory() == "Pop")
-			System.out.println(popQuestions.get(0).question);
-		if (currentCategory() == "Science")
-			System.out.println(scienceQuestions.get(0).question);
-		if (currentCategory() == "Sports")
-			System.out.println(sportsQuestions.get(0).question);
-		if (currentCategory() == "Rock" )
-			System.out.println(rockQuestions.get(0).question);
-		if (currentCategory() == "Technologie" )
-			System.out.println(technologieQuestion.get(0).question);
+		if (currentCategory() == "Pop"){
+			System.out.println(popQuestions.get(popint2).question);
+		 popint2++;
+		}
+		if (currentCategory() == "Science"){
+			System.out.println(scienceQuestions.get(scienceint2).question);
+			scienceint2++;}
+		if (currentCategory() == "Sports"){
+			System.out.println(sportsQuestions.get(sportint2).question);
+			sportint2++;}
+		if (currentCategory() == "Rock" ){
+			System.out.println(rockQuestions.get(rockint2).question);
+			rockint2++;}
+		if (currentCategory() == "Technologie" ){
+			System.out.println(technologieQuestion.get(techint2).question);
+			techint2++;	}
 		}
 
 	
@@ -209,14 +215,7 @@ public class Game {
 
 
 	private boolean didPlayerWin() {
-		System.out.println("pop a été choisi "+popint);
-		System.out.println("science a été choisi "+scienceint);
-		System.out.println("sport a été choisi "+sportint);
-		if (Rock==true){
-			System.out.println("rock a été choisi "+rockint);
-		}
-		else
-		System.out.println("technologie a été choisi "+techint);
+		
 		
 		return !(purses[currentPlayer] == goldWin);
 	}
