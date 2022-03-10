@@ -13,8 +13,6 @@ public class GameRunner {
 		Game aGame = new Game();
 
 		aGame.add("Chet");
-		aGame.add("Chet");
-		aGame.add("Chet");
 
 		if(aGame.verif()){
 			Random rand = new Random();
@@ -33,7 +31,7 @@ public class GameRunner {
 
 			} while (notAWinner);
 		}else{
-			System.out.println("Le nombre de joueur n'ai pas correct");
+			System.out.println("Number of player is not correct");
 		}
 		
 	}
