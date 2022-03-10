@@ -98,10 +98,12 @@ public class Game {
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
-			if (roll % (2 + players.get(currentPlayer).nbTurnInJail) != 0) {
+			int modulo = 2 + players.get(currentPlayer).nbTurnInJail;
+			System.out.println("you have 1 chance on " + modulo + " to get out of the penalty box");
+			if (roll % modulo != 0) {
 				isGettingOutOfPenaltyBox = true;
 
-				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box after ");
+				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box");
 				inPenaltyBox[currentPlayer]=false;
 				places[currentPlayer] = places[currentPlayer] + roll;
 				if (places[currentPlayer] > 12) places[currentPlayer] = places[currentPlayer] - 13;
