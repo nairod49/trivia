@@ -14,6 +14,14 @@ public class Game {
 
 	Settings mySets;
 
+	public boolean isStopTheGame() {
+		return stopTheGame;
+	}
+
+	boolean doNotDisplayQuestion = false;
+	boolean stopTheGame = false;
+
+
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
@@ -200,8 +208,9 @@ public class Game {
 					+ " Gold Coins.");
 			
 			boolean winner = didPlayerWin();
-			if (winner){
-				this.replay(this.mySets);
+			if (winner == false){
+				doNotDisplayQuestion = true;
+				this.replay();
 			}
 
 			currentPlayer++;
@@ -227,15 +236,21 @@ public class Game {
 	}
 
 	private boolean didPlayerWin() {
-		System.out.println("pop a été choisi "+popint);
-		System.out.println("science a été choisi "+scienceint);
-		System.out.println("sport a été choisi "+sportint);
-		if (Rock==true){
-			System.out.println("rock a été choisi "+rockint);
-		}
-		else
-		System.out.println("technologie a été choisi "+techint);
+		if (doNotDisplayQuestion == true){
 
+		}
+		else if (doNotDisplayQuestion == true){
+			System.out.println("pop a été choisi "+popint);
+			System.out.println("science a été choisi "+scienceint);
+			System.out.println("sport a été choisi "+sportint);
+			if (Rock==true){
+				System.out.println("rock a été choisi "+rockint);
+			}
+			else
+				System.out.println("technologie a été choisi "+techint);
+
+			return !(purses[currentPlayer] == goldWin);
+		}
 		return !(purses[currentPlayer] == goldWin);
 	}
 
@@ -248,7 +263,7 @@ public class Game {
 
 	}
 
-	public boolean replay(Settings settingsRecorded){
+	public boolean replay(){
 		boolean carryOnGame = false;
 
 
@@ -258,7 +273,16 @@ public class Game {
 		sc = new Scanner(System.in);
 		System.out.println("Carry on Game ? (Y/N)");
 		str = sc.nextLine();
-		carryOnGame = str.equalsIgnoreCase("n" ) ? true : false;
+		if(str.equals("N")){
+			carryOnGame = true;
+			stopTheGame = true;
+		}
+		if(str.equals("Y")){
+			carryOnGame  = false;
+			stopTheGame = false;
+		}
+
+
 		return carryOnGame;
 
 	}

@@ -25,7 +25,7 @@ public class GameRunner {
 		while(replay) {
 			if (aGame.verif()) {
 				Random rand = new Random();
-				 aGame.recordSettings();
+				 //aGame.recordSettings();
 
 				do {
 
@@ -33,8 +33,14 @@ public class GameRunner {
 
 					if (rand.nextInt(9) == 7) {
 						notAWinner = aGame.wrongAnswer();
+						if (aGame.isStopTheGame()){
+							replay = false;
+						}
 					} else {
 						notAWinner = aGame.wasCorrectlyAnswered();
+						if (aGame.isStopTheGame()){
+							replay = false;
+						}
 					}
 
 
