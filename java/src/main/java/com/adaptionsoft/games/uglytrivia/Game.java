@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 
 public class Game {
 
 	ArrayList<Player> players = new ArrayList();
+
+	Settings mySets;
 
     int[] places = new int[6];
     int[] purses  = new int[6];
@@ -35,6 +38,7 @@ public class Game {
 
 	public Game(){
 
+		mySets = new Settings();
 		Scanner sc = new Scanner(System.in);
 		String str = "";
 		do {
@@ -196,6 +200,10 @@ public class Game {
 					+ " Gold Coins.");
 			
 			boolean winner = didPlayerWin();
+			if (winner){
+				this.replay(this.mySets);
+			}
+
 			currentPlayer++;
 			if (currentPlayer == players.size()) currentPlayer = 0;
 			
@@ -227,7 +235,31 @@ public class Game {
 		}
 		else
 		System.out.println("technologie a été choisi "+techint);
-		
+
 		return !(purses[currentPlayer] == goldWin);
+	}
+
+	public Settings recordSettings(){
+
+		Settings setstoReplay = new Settings(this.players , this.goldWin , this.Rock );
+		mySets = setstoReplay;
+
+		return setstoReplay;
+
+	}
+
+	public boolean replay(Settings settingsRecorded){
+		boolean carryOnGame = false;
+
+
+
+		Scanner sc = new Scanner(System.in);
+		String str = "";
+		sc = new Scanner(System.in);
+		System.out.println("Carry on Game ? (Y/N)");
+		str = sc.nextLine();
+		carryOnGame = str.equalsIgnoreCase("n" ) ? true : false;
+		return carryOnGame;
+
 	}
 }
