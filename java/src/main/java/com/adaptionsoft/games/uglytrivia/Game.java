@@ -21,6 +21,12 @@ public class Game {
 	int sportint2=0;
 	int rockint2=0;
 	int techint2=0;
+	int rapint2=0;
+	int philint2=0;
+	int litint2=0;
+	int geoint2=0;
+	int peopint2=0;
+
 
 	
 
@@ -34,6 +40,11 @@ public class Game {
 	LinkedList<Question> sportsQuestions = new LinkedList();
 	LinkedList<Question> rockQuestions = new LinkedList();
 	LinkedList<Question> technologieQuestion = new LinkedList();
+	LinkedList<Question> rapQuestions = new LinkedList();
+	LinkedList<Question> philosophyQuestions = new LinkedList();
+	LinkedList<Question> literratureQuestions = new LinkedList();
+	LinkedList<Question> geographyQuestions = new LinkedList();
+	LinkedList<Question> peopleQuestions = new LinkedList();
 	boolean precedentJoueurAPerdu = false;
 
 	Scanner sc;
@@ -63,6 +74,11 @@ public class Game {
 			popQuestions.addLast(new Question(i,new Category(i,"Pop"),"Pop Question " + i));
 			scienceQuestions.addLast(new Question(i,new Category(i,"Science"),"Science Question " + i));
 			sportsQuestions.addLast(new Question(i,new Category(i,"Sports"),"Sports Question " + i));
+			rapQuestions.addLast(new Question(i,new Category(i,"Rap"),"Rap Question " + i));
+			philosophyQuestions.addLast(new Question(i,new Category(i,"Philosophy"),"Philosophy Question " + i));
+			literratureQuestions.addLast(new Question(i,new Category(i,"Literrature"),"Literrature Question " + i));
+			geographyQuestions.addLast(new Question(i,new Category(i,"Geography"),"Geography Question " + i));
+			peopleQuestions.addLast(new Question(i,new Category(i,"People"),"People Question " + i));
 			if(Rock==true)
 				rockQuestions.addLast(new Question(i,new Category(i,"Rocks"),"Rocks Question " + i));
 			else
@@ -117,7 +133,7 @@ public class Game {
 				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box");
 				inPenaltyBox[currentPlayer]=false;
 				places[currentPlayer] = places[currentPlayer] + roll;
-				if (places[currentPlayer] > 12) places[currentPlayer] = places[currentPlayer] - 13;
+				if (places[currentPlayer] > 8) places[currentPlayer] = places[currentPlayer] - 9;
 				
 				System.out.println(players.get(currentPlayer).getName()
 						+ "'s new location is " 
@@ -133,7 +149,7 @@ public class Game {
 		} else {
 		
 			places[currentPlayer] = places[currentPlayer] + roll;
-			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+			if (places[currentPlayer] > 8) places[currentPlayer] = places[currentPlayer] - 9;
 
 			System.out.println(players.get(currentPlayer).getName()
 					+ "'s new location is " 
@@ -176,6 +192,31 @@ public class Game {
 			sportint2++;
 			sportint2 = verifQuestion(sportint2);
 		}
+		if (currentCategory() == "Rap"){
+			System.out.println(rapQuestions.get(rapint2).question);
+			rapint2++;
+			rapint2 = verifQuestion(rapint2);
+		}
+		if (currentCategory() == "Philosophy"){
+			System.out.println(philosophyQuestions.get(philint2).question);
+			philint2++;
+			philint2 = verifQuestion(philint2);
+		}
+		if (currentCategory() == "Literrature"){
+			System.out.println(literratureQuestions.get(litint2).question);
+			litint2++;
+			litint2 = verifQuestion(litint2);
+		}
+		if (currentCategory() == "Geography"){
+			System.out.println(geographyQuestions.get(geoint2).question);
+			geoint2++;
+			geoint2 = verifQuestion(geoint2);
+		}
+		if (currentCategory() == "People"){
+			System.out.println(peopleQuestions.get(peopint2).question);
+			peopint2++;
+			peopint2 = verifQuestion(peopint2);
+		}
 		if (currentCategory() == "Rock" ){
 			System.out.println(rockQuestions.get(rockint2).question);
 			rockint2++;
@@ -195,22 +236,20 @@ public class Game {
 	private String currentCategory() {
 		if (places[currentPlayer] == 0) {players.get(currentPlayer).incpop();
 			return "Pop";}
-		if (places[currentPlayer] == 4) {players.get(currentPlayer).incpop();
-			return "Pop";}
-		if (places[currentPlayer] == 8) {players.get(currentPlayer).incpop();
-			return "Pop";}
 		if (places[currentPlayer] == 1) {players.get(currentPlayer).incscience();
-			return "Science";}
-		if (places[currentPlayer] == 5){players.get(currentPlayer).incscience();
-			return "Science";}
-		if (places[currentPlayer] == 9) {players.get(currentPlayer).incscience();
 			return "Science";}
 		if (places[currentPlayer] == 2) {players.get(currentPlayer).incsport();
 			return "Sports";}
-		if (places[currentPlayer] == 6) {players.get(currentPlayer).incsport();
-			return "Sports";}
-		if (places[currentPlayer] == 10) {players.get(currentPlayer).incsport();
-			return "Sports";}
+		if (places[currentPlayer] == 3) {players.get(currentPlayer).incRap();
+			return "Rap";}
+		if (places[currentPlayer] == 4){players.get(currentPlayer).incPhil();
+			return "Philosophy";}
+		if (places[currentPlayer] == 5) {players.get(currentPlayer).incLit();
+			return "Literrature";}
+		if (places[currentPlayer] == 6) {players.get(currentPlayer).incGeo();
+			return "Geography";}
+		if (places[currentPlayer] == 7) {players.get(currentPlayer).incPeop();
+			return "People";}
 		
 		if (Rock==true)
 		{players.get(currentPlayer).incrock();
@@ -227,7 +266,7 @@ public class Game {
 	
 				sc = new Scanner(System.in);
 				String newLine = System.getProperty("line.separator");
-				System.out.println("What is the kind of the next question?  " + newLine+ " pop: 1 "+ newLine +" science: 2 "+ newLine + " sport: 3 ");
+				System.out.println("What is the kind of the next question?  " + newLine+ " pop: 1 "+ newLine +" science: 2 "+ newLine + " sport: 3 " + newLine+ " Rap: 4 " + newLine + " Philosophy: 5 " + newLine + " Literrature: 6 " + newLine + "Geography: 7 " + newLine + " People: 8 ");
 				String str = sc.nextLine();
 	
 				int switchCase=Integer.parseInt(str);
@@ -247,6 +286,31 @@ public class Game {
 					case 3:
 						categorie.setIdCategory(2);
 						categorie.setTypeCategory("Sport");
+						break;
+
+					case 4:
+						categorie.setIdCategory(3);
+						categorie.setTypeCategory("Rap");
+						break;
+
+					case 5:
+						categorie.setIdCategory(4);
+						categorie.setTypeCategory("Philosophy");
+						break;
+
+					case 6:
+						categorie.setIdCategory(5);
+						categorie.setTypeCategory("Literrature");
+						break;
+
+					case 7:
+						categorie.setIdCategory(6);
+						categorie.setTypeCategory("Geography");
+						break;
+
+					case 8:
+						categorie.setIdCategory(7);
+						categorie.setTypeCategory("People");
 						break;
 	
 	
@@ -282,9 +346,39 @@ public class Game {
 					categorie.setTypeCategory("Sport");
 					players.get(currentPlayer).incsport();
 					break;
-	
+
 				case 3:
 					categorie.setIdCategory(3);
+					categorie.setTypeCategory("Rap");
+					players.get(currentPlayer).incRap();
+					break;
+
+				case 4:
+					categorie.setIdCategory(4);
+					categorie.setTypeCategory("Philosophy");
+					players.get(currentPlayer).incPhil();
+					break;
+
+				case 5:
+					categorie.setIdCategory(5);
+					categorie.setTypeCategory("Literrature");
+					players.get(currentPlayer).incLit();
+					break;
+
+				case 6:
+					categorie.setIdCategory(6);
+					categorie.setTypeCategory("Geography");
+					players.get(currentPlayer).incGeo();
+					break;
+
+				case 7:
+					categorie.setIdCategory(7);
+					categorie.setTypeCategory("People");
+					players.get(currentPlayer).incPeop();
+					break;
+	
+				case 8:
+					categorie.setIdCategory(8);
 					if(Rock==true){
 					categorie.setTypeCategory("Rock");
 					players.get(currentPlayer).incrock();}
@@ -292,56 +386,9 @@ public class Game {
 					players.get(currentPlayer).inctech();}
 
 					break;
-	
-				case 4:
-					categorie.setIdCategory(4);
-					categorie.setTypeCategory("Pop");
-					players.get(currentPlayer).incpop();
-					break;
-	
-				case 5:
-					categorie.setIdCategory(5);
-					categorie.setTypeCategory("Science");
-					players.get(currentPlayer).incscience();
-					break;
-				case 6:
-					categorie.setIdCategory(6);
-					categorie.setTypeCategory("Sport");
-					players.get(currentPlayer).incsport();
-					break;
-				case 7:
-					categorie.setIdCategory(7);
-					if(Rock==true){
-						categorie.setTypeCategory("Rock");
-						players.get(currentPlayer).incrock();}
-						else{categorie.setTypeCategory("Technologie");
-						players.get(currentPlayer).inctech();}
-					break;
-				case 8:
-					categorie.setIdCategory(8);
-					categorie.setTypeCategory("Pop");
-					players.get(currentPlayer).incpop();
-					break;
-				case 9:
-					categorie.setIdCategory(9);
-					categorie.setTypeCategory("Science");
-					players.get(currentPlayer).incscience();
-					break;
-				case 10:
-					categorie.setIdCategory(10);
-					categorie.setTypeCategory("Sport");
-					players.get(currentPlayer).incsport();
-					break;
-				case 11:
-					categorie.setIdCategory(11);
-					if(Rock==true){
-						categorie.setTypeCategory("Rock");
-						players.get(currentPlayer).incrock();}
-						else{categorie.setTypeCategory("Technologie");
-						players.get(currentPlayer).inctech();}
-					break;
+
 				default:
-					System.out.println("place superieur à 11");
+					System.out.println("place superieur à 8");
 					break;
 			}
 	
@@ -407,6 +454,11 @@ public class Game {
 			System.out.println("Pop: "+ players.get(i).getpop());
 			System.out.println("Science: "+ players.get(i).getscience());
 			System.out.println("Sport: "+ players.get(i).getsport());
+			System.out.println("Rap: "+ players.get(i).getRap());
+			System.out.println("Philosphy: "+ players.get(i).getPhilosophy());
+			System.out.println("Literrature: "+ players.get(i).getLiterrature());
+			System.out.println("Geography: "+ players.get(i).getGeography());
+			System.out.println("People: "+ players.get(i).getPeople());
 			System.out.println("Rock: "+ players.get(i).getrock());
 			System.out.println("Tech: "+ players.get(i).gettec());
 		}

@@ -8,6 +8,11 @@ public class Player {
     int popint=0;
 	int scienceint=0;
 	int sportint=0;
+    int rapint=0;
+    int philint=0;
+    int litint=0;
+    int geoint=0;
+    int peopint=0;
 	int rockint=0;
 	int techint=0;
     public int nbCorrectAnswerConsecutive = 0;
@@ -34,6 +39,21 @@ public class Player {
     public int getsport(){
         return this.sportint;
     }
+    public int getRap(){
+        return this.rapint;
+    }
+    public int getPhilosophy(){
+        return this.philint;
+    }
+    public int getLiterrature(){
+        return this.litint;
+    }
+    public int getGeography(){
+        return this.geoint;
+    }
+    public int getPeople(){
+        return this.peopint;
+    }
     public int getrock(){
         return this.rockint;
     }
@@ -49,6 +69,21 @@ public class Player {
     }
     public void incsport(){
         this.sportint++;
+    }
+    public void incRap(){
+        this.rapint++;
+    }
+    public void incPhil(){
+        this.philint++;
+    }
+    public void incLit(){
+        this.litint++;
+    }
+    public void incGeo(){
+        this.geoint++;
+    }
+    public void incPeop(){
+        this.peopint++;
     }
     public void incrock(){
         this.rockint++;
