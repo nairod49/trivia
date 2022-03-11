@@ -133,14 +133,14 @@ public class Game {
 					+ places[currentPlayer]);
 				// if this.precedentJoueurAPerdu = true;
 			//int x = entierPermettantDeChoisirLaQuestion
-			if(precedentJoueurAPerdu){
+			//if(precedentJoueurAPerdu){
 
-				catRpzPlaceJoueurOuIdDonneParPerdnant = askLoser();
-			}
-			else{
+			//	catRpzPlaceJoueurOuIdDonneParPerdnant = askLoser();
+		//	}
+		//	else{
 				// catRpzPlaceJoueurOuIdDonneParPerdnant =
 				catRpzPlaceJoueurOuIdDonneParPerdnant = retournerCategorieQuestion(places[currentPlayer]);
-			}
+		//	}
 			System.out.println("The category is " + catRpzPlaceJoueurOuIdDonneParPerdnant.typeCategory);
 			// useless
 			// askQuestion();	
@@ -379,7 +379,7 @@ public class Game {
 		return verif;
 	}
 	private boolean didPlayerWin() {
-		if(purses[currentPlayer] == goldWin){
+		if(purses[currentPlayer] >= goldWin){
 			
 			affichage_categorie();
 			
