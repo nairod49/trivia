@@ -9,7 +9,7 @@ import static java.lang.Integer.parseInt;
 public class Game {
 
 	ArrayList<Player> players = new ArrayList();
-
+	ArrayList<Player> Playwinner = new ArrayList(); 
 
 
 
@@ -24,7 +24,7 @@ public class Game {
 	int rockint2=0;
 	int techint2=0;
 
-	
+	int winnerint=0;
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -86,6 +86,7 @@ public class Game {
 
 	public boolean add(Player player) {
 	    players.add(player);
+		Playwinner.add(player);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
@@ -380,30 +381,42 @@ public class Game {
 		}
 		return verif;
 	}
+
+
+	
+
+
 	private boolean didPlayerWin() {
-		if(purses[currentPlayer] >= goldWin && players.size() > 2) {
-			int podium = 1;
-			while(podium < 4) {
-				players.get(currentPlayer).setClassement(podium);
-				podium++;
-				affichage_categorie();
-				return false;
-			}
-		} else if(purses[currentPlayer] >= goldWin) {
-			affichage_categorie();
-			return false;
-		}
-		else {
+		int x=players.size();
+		int y= Playwinner.size();
+		if(winnerint==3) {
+		
 			int numberPlayer = 0;
 			while(numberPlayer < players.size()) {
 				System.out.println("Le joueur " + players.get(numberPlayer).getName() + " est " + players.get(numberPlayer).getClassement());
 				numberPlayer++;
 			}
-			return true;
+			return false;
 		}
+		else  if(purses[currentPlayer] >= goldWin && winnerint<=3) {
+			winnerint++;
+			players.get(currentPlayer).setClassement(winnerint);
+			
 
-		return false;
+			System.out.println("ttest");
+			return true ;
+	
 	}
+	else return true;
+
+
+	}
+
+
+
+
+	
+
 
 	public void affichage_categorie(){
 		int val= players.size();

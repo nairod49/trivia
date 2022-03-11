@@ -18,10 +18,11 @@ public class GameRunner {
 		Game aGame = new Game();
 		Player player1 = new Player("Chet","Chet",10,0);
 		Player player2 = new Player("Chet 2","Chet 2",15,0);
-
+		Player player3 = new Player("MIch","Chet 2",15,0);
 
 		aGame.add(player1);
 		aGame.add(player2);
+		aGame.add(player3);
 		if(aGame.verif()){
 			Random rand = new Random();
 			do {
