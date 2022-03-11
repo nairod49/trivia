@@ -22,6 +22,7 @@ public class GameRunner {
 
 		aGame.add(player1);
 		aGame.add(player2);
+		aGame.add(player3);
 
 		Scanner mode = new Scanner(System.in);
 		System.out.println("Mode demonstration 1 Mode prod 2");
