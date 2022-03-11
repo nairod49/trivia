@@ -102,6 +102,8 @@ public class Game {
 
 	public void roll(int roll) {
 		System.out.println(players.get(currentPlayer).getName() + " is the current player");
+		if(players.get(currentPlayer).getClassement() != 0)
+			currentPlayer++;
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
@@ -379,15 +381,19 @@ public class Game {
 		return verif;
 	}
 	private boolean didPlayerWin() {
-		if(purses[currentPlayer] >= goldWin){
-			
+		if(purses[currentPlayer] >= goldWin && players.size() > 2) {
+			int podium = 1;
+			while(podium < 4) {
+				players.get(currentPlayer).setClassement(podium);
+				podium++;
+				affichage_categorie();
+				return false;
+			}
+		} else if(purses[currentPlayer] >= goldWin) {
 			affichage_categorie();
-			
 			return false;
 		}
 		else return true;
-		
-		
 	}
 
 	public void affichage_categorie(){
