@@ -393,7 +393,16 @@ public class Game {
 			affichage_categorie();
 			return false;
 		}
-		else return true;
+		else {
+			int numberPlayer = 0;
+			while(numberPlayer < players.size()) {
+				System.out.println("Le joueur " + players.get(numberPlayer).getName() + " est " + players.get(numberPlayer).getClassement());
+				numberPlayer++;
+			}
+			return true;
+		}
+
+		return false;
 	}
 
 	public void affichage_categorie(){
