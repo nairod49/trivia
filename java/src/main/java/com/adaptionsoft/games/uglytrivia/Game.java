@@ -11,9 +11,6 @@ public class Game {
 
 	ArrayList<Player> players = new ArrayList();
 
-
-
-
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
@@ -101,9 +98,17 @@ public class Game {
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
-			if (roll % 2 != 0) {
+			Random rand = new Random();
+
+			System.out.println("nb turn : " + players.get(currentPlayer).nbTurnInJail);
+
+			int rollPenaltyBox = rand.nextInt(players.get(currentPlayer).nbTurnInJail) + 1;
+
+			System.out.println("roll : " + rollPenaltyBox);
+
+			if (rollPenaltyBox == 1) {
 				isGettingOutOfPenaltyBox = true;
-				
+
 				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box");
 				inPenaltyBox[currentPlayer]=false;
 				places[currentPlayer] = places[currentPlayer] + roll;
@@ -117,13 +122,14 @@ public class Game {
 			} else {
 				System.out.println(players.get(currentPlayer).getName() + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
+				players.get(currentPlayer).getNbTurnInJail();
 				}
 			
 		} else {
 		
 			places[currentPlayer] = places[currentPlayer] + roll;
 			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-			
+
 			System.out.println(players.get(currentPlayer).getName()
 					+ "'s new location is " 
 					+ places[currentPlayer]);
@@ -133,24 +139,18 @@ public class Game {
 		
 	}
 
-
-
 	private void askQuestion() {
-		if (currentCategory() == "Pop") {
+		if (currentCategory() == "Pop")
 			System.out.println(popQuestions.get(0).question);
-		}else if (currentCategory() == "Science") {
+		if (currentCategory() == "Science")
 			System.out.println(scienceQuestions.get(0).question);
-		}else if (currentCategory() == "Sports") {
+		if (currentCategory() == "Sports")
 			System.out.println(sportsQuestions.get(0).question);
-		}
-		else if (currentCategory() == "Rock" ){
+		if (currentCategory() == "Rock" )
 			System.out.println(rockQuestions.get(0).question);
-		}
-		else if (currentCategory() == "Technologie" )
+		if (currentCategory() == "Technologie" )
 			System.out.println(technologieQuestion.get(0).question);
 		}
-
-	
 	
 	private String currentCategory() {
 		if (places[currentPlayer] == 0) {popint++;
@@ -178,9 +178,7 @@ public class Game {
 		else
 		{techint++;
 			return "Technologie";}
-
 	}
-
 
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
@@ -190,8 +188,8 @@ public class Game {
 		} else {
 
 			this.gold = players.get(currentPlayer).getNbCorrectAnswerConsecutitve();
-			System.out.println("Answer was corrent!!!!");
-			purses[currentPlayer] = purses[currentPlayer] + this.gold;
+			System.out.println("Answer was correct!!!!");
+			purses[currentPlayer] = 1 + gold;
 			System.out.println(players.get(currentPlayer).getName()
 					+ " now has "
 					+ purses[currentPlayer]
@@ -208,28 +206,18 @@ public class Game {
 	public boolean wrongAnswer(){
 		System.out.println("Question was incorrectly answered");
 		System.out.println(players.get(currentPlayer).getName()+ " was sent to the penalty box");
+
+		players.get(currentPlayer).getNbTurnInJail();
+
 		inPenaltyBox[currentPlayer] = true;
 		this.gold = 0;
+
 		players.get(currentPlayer).nbCorrectAnswerConsecutive = 0;
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
 		return true;
 	}
 
-	public boolean useJoker(){
-		boolean verif = false;
-		if(players.get(currentPlayer).joker == 1) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Voulez vous utiliser un joker (Y/N) :");
-			String yesNo = sc.next();
-
-			if (yesNo.equals("Y")) {
-				verif = true;
-				players.get(currentPlayer).joker = 0;
-			}
-		}
-		return verif;
-	}
 	private boolean didPlayerWin() {
 		System.out.println("pop a été choisi "+popint);
 		System.out.println("science a été choisi "+scienceint);
@@ -241,14 +229,5 @@ public class Game {
 		System.out.println("technologie a été choisi "+techint);
 		
 		return !(purses[currentPlayer] == goldWin);
-	}
-
-	public Boolean leave(){
-		boolean finish = true;
-		players.remove(currentPlayer);
-		if (players.size()==1){
-			finish = false;
-		}
-		return finish;
 	}
 }
