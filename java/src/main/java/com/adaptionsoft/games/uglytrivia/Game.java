@@ -10,6 +10,9 @@ import static java.lang.Integer.parseInt;
 public class Game {
 
 	ArrayList<Player> players = new ArrayList();
+	ArrayList<Player> Playwinner = new ArrayList(); 
+
+
 
     int[] places = new int[6];
     int[] purses  = new int[6];
@@ -28,7 +31,7 @@ public class Game {
 	int peopint2=0;
 
 
-	
+	int winnerint=0;
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -100,6 +103,7 @@ public class Game {
 
 	public boolean add(Player player) {
 	    players.add(player);
+		Playwinner.add(player);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
@@ -116,6 +120,8 @@ public class Game {
 
 	public void roll(int roll) {
 		System.out.println(players.get(currentPlayer).getName() + " is the current player");
+		if(players.get(currentPlayer).getClassement() != 0)
+			currentPlayer++;
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
@@ -434,16 +440,36 @@ public class Game {
 		return true;
 	}
 
+	
+
+
+	
+
+
 	private boolean didPlayerWin() {
-		if(purses[currentPlayer] >= goldWin){
-			
-			affichage_categorie();
-			
+		int x=players.size();
+		int y= Playwinner.size();
+		if(winnerint==3) {
+		
+			int numberPlayer = 0;
+			while(numberPlayer < players.size()) {
+				System.out.println("Le joueur " + players.get(numberPlayer).getName() + " est " + players.get(numberPlayer).getClassement());
+				numberPlayer++;
+			}
 			return false;
 		}
-		else return true;
-		
-		
+		else  if(purses[currentPlayer] >= goldWin && winnerint<=3) {
+			winnerint++;
+			players.get(currentPlayer).setClassement(winnerint);
+			
+
+			System.out.println("ttest");
+			return true ;
+	
+	}
+	else return true;
+
+
 	}
 	public void affichage_categorie(){
 		int val= players.size();

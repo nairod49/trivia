@@ -17,6 +17,8 @@ public class Player {
 	int techint=0;
     public int nbCorrectAnswerConsecutive = 0;
     public int nbTurnInJail = 0;
+    public int joker = 1;
+    public int classement;
 
     public Player(String name, String pseudo, int age, int score){
         this.name = name;
@@ -28,6 +30,7 @@ public class Player {
         this.sportint=0;
         this.rockint=0;
         this.techint=0;
+        this.classement=0;
     }
 
     public int getpop(){
@@ -123,6 +126,10 @@ public class Player {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public void setClassement(int classement) {this.classement = classement; }
+
+    public int getClassement() { return classement; }
 
     /**
      * Calcul le total du score
