@@ -11,7 +11,7 @@ public class Player {
 	int rockint=0;
 	int techint=0;
     public int nbCorrectAnswerConsecutive = 0;
-    public int joker = 1;
+    public int nbTurnInJail = 0;
 
     public Player(String name, String pseudo, int age, int score){
         this.name = name;
@@ -97,11 +97,14 @@ public class Player {
         this.totalScore = getScore() + 1;
         return this.totalScore;
     }
-    public int getNbCorrectAnswerConsecutitve(){
 
+    public int getNbCorrectAnswerConsecutitve(){
         this.nbCorrectAnswerConsecutive++;
         return this.nbCorrectAnswerConsecutive;
+    }
 
-
+    public int getNbTurnInJail() {
+        this.nbTurnInJail++;
+        return this.nbTurnInJail;
     }
 }

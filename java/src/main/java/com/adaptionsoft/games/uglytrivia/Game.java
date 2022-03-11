@@ -2,6 +2,7 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
@@ -9,9 +10,6 @@ import static java.lang.Integer.parseInt;
 public class Game {
 
 	ArrayList<Player> players = new ArrayList();
-
-
-
 
     int[] places = new int[6];
     int[] purses  = new int[6];
@@ -61,7 +59,7 @@ public class Game {
 		str = sc.nextLine();
 		Rock = str.equalsIgnoreCase("n" ) ? true : false;
 
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 100; i++) {
 			popQuestions.addLast(new Question(i,new Category(i,"Pop"),"Pop Question " + i));
 			scienceQuestions.addLast(new Question(i,new Category(i,"Science"),"Science Question " + i));
 			sportsQuestions.addLast(new Question(i,new Category(i,"Sports"),"Sports Question " + i));
@@ -105,9 +103,17 @@ public class Game {
 		System.out.println("They have rolled a " + roll);
 		
 		if (inPenaltyBox[currentPlayer]) {
-			if (roll % 2 != 0) {
+			Random rand = new Random();
+
+			System.out.println("nb turn : " + players.get(currentPlayer).nbTurnInJail);
+
+			int rollPenaltyBox = rand.nextInt(players.get(currentPlayer).nbTurnInJail) + 1;
+
+			System.out.println("roll : 1/" +players.get(currentPlayer).nbTurnInJail+1 );
+
+			if (rollPenaltyBox == 1) {
 				isGettingOutOfPenaltyBox = true;
-				
+
 				System.out.println(players.get(currentPlayer).getName() + " is getting out of the penalty box");
 				inPenaltyBox[currentPlayer]=false;
 				places[currentPlayer] = places[currentPlayer] + roll;
@@ -117,17 +123,18 @@ public class Game {
 						+ "'s new location is " 
 						+ places[currentPlayer]);
 						System.out.println("The category is " + retournerCategorieQuestion(places[currentPlayer]).typeCategory);
-				askQuestion();
+
 			} else {
 				System.out.println(players.get(currentPlayer).getName() + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
+				//players.get(currentPlayer).getNbTurnInJail();
 				}
 			
 		} else {
 		
 			places[currentPlayer] = places[currentPlayer] + roll;
 			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-			
+
 			System.out.println(players.get(currentPlayer).getName()
 					+ "'s new location is " 
 					+ places[currentPlayer]);
@@ -143,32 +150,47 @@ public class Game {
 		//	}
 			System.out.println("The category is " + catRpzPlaceJoueurOuIdDonneParPerdnant.typeCategory);
 			// useless
-			// askQuestion();	
-			}		
+			askQuestion();
+			}
 			}
 
-
+	private int verifQuestion(int categori){
+		if(categori==50){
+			return 0;
+		}
+		return categori;
+	}
 	private void askQuestion() {
 		if (currentCategory() == "Pop"){
 			System.out.println(popQuestions.get(popint2).question);
 		 popint2++;
+		 popint2 = verifQuestion(popint2);
 		}
 		if (currentCategory() == "Science"){
 			System.out.println(scienceQuestions.get(scienceint2).question);
-			scienceint2++;}
+			scienceint2++;
+			scienceint2 = verifQuestion(scienceint2);
+		}
 		if (currentCategory() == "Sports"){
 			System.out.println(sportsQuestions.get(sportint2).question);
-			sportint2++;}
+			sportint2++;
+			sportint2 = verifQuestion(sportint2);
+		}
 		if (currentCategory() == "Rock" ){
 			System.out.println(rockQuestions.get(rockint2).question);
-			rockint2++;}
+			rockint2++;
+			rockint2 = verifQuestion(rockint2);
+		}
 		if (currentCategory() == "Technologie" ){
 			System.out.println(technologieQuestion.get(techint2).question);
-			techint2++;	}
+			techint2++;
+			techint2 = verifQuestion(techint2);
+		}
 
 		}
 
-	
+
+
 
 	private String currentCategory() {
 		if (places[currentPlayer] == 0) {players.get(currentPlayer).incpop();
@@ -196,10 +218,8 @@ public class Game {
 		else
 		{players.get(currentPlayer).inctech();
 			return "Technologie";}
-			
 		}
-	
-		public Category askLoser(){
+	public Category askLoser(){
 	
 			Category categorie  = new Category(0, "");
 	
@@ -237,7 +257,7 @@ public class Game {
 			return categorie;
 		}
 	
-		public Category retournerCategorieQuestion(int EntierRepresentantLAPacedeLUser){
+	public Category retournerCategorieQuestion(int EntierRepresentantLAPacedeLUser){
 	
 			Category categorie  = new Category(0, "");
 	
@@ -328,7 +348,6 @@ public class Game {
 			return  categorie;
 	}
 
-
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
 				currentPlayer++;
@@ -337,8 +356,8 @@ public class Game {
 		} else {
 
 			this.gold = players.get(currentPlayer).getNbCorrectAnswerConsecutitve();
-			System.out.println("Answer was corrent!!!!");
-			purses[currentPlayer] = purses[currentPlayer] + this.gold;
+			System.out.println("Answer was correct!!!!");
+			purses[currentPlayer] = 1 + gold;
 			System.out.println(players.get(currentPlayer).getName()
 					+ " now has "
 					+ purses[currentPlayer]
@@ -355,8 +374,12 @@ public class Game {
 	public boolean wrongAnswer(){
 		System.out.println("Question was incorrectly answered");
 		System.out.println(players.get(currentPlayer).getName()+ " was sent to the penalty box");
+
+		players.get(currentPlayer).getNbTurnInJail();
+
 		inPenaltyBox[currentPlayer] = true;
 		this.gold = 0;
+
 		players.get(currentPlayer).nbCorrectAnswerConsecutive = 0;
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
@@ -364,20 +387,6 @@ public class Game {
 		return true;
 	}
 
-	public boolean useJoker(){
-		boolean verif = false;
-		if(players.get(currentPlayer).joker == 1) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Voulez vous utiliser un joker (Y/N) :");
-			String yesNo = sc.next();
-
-			if (yesNo.equals("Y")) {
-				verif = true;
-				players.get(currentPlayer).joker = 0;
-			}
-		}
-		return verif;
-	}
 	private boolean didPlayerWin() {
 		if(purses[currentPlayer] >= goldWin){
 			
@@ -389,7 +398,6 @@ public class Game {
 		
 		
 	}
-
 	public void affichage_categorie(){
 		int val= players.size();
 
@@ -423,5 +431,9 @@ public class Game {
 	}
 	public String currentPlayer(){
 		return players.get(currentPlayer).getName();
+	}
+
+	public boolean useJoker() {
+		return true;
 	}
 }

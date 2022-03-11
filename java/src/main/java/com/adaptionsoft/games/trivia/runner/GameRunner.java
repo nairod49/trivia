@@ -22,44 +22,48 @@ public class GameRunner {
 
 		aGame.add(player1);
 		aGame.add(player2);
-		if(aGame.verif()){
-			Random rand = new Random();
-			do {
-				aGame.roll(rand.nextInt(5) + 1);
+
+		Scanner mode = new Scanner(System.in);
+		System.out.println("Mode demonstration 1 Mode prod 2");
+		if(mode.next().equals("1")) {
+			if (aGame.verif()) {
+				Random rand = new Random();
+				do {
+					aGame.roll(rand.nextInt(5) + 1);
 					if (rand.nextInt(9) == 7) {
-					/*	if (!aGame.useJoker()) {
-							notAWinner = aGame.wrongAnswer();
-						}*/
+						//notAWinner = aGame.wrongAnswer();
 					} else {
 						notAWinner = aGame.wasCorrectlyAnswered();
 					}
-			
-			} while (notAWinner);
+
+				} while (notAWinner);
+			} else {
+				System.out.println("Number of player is not correct");
+			}
 		}else{
-			System.out.println("Number of player is not correct");
-		}
-		/*if(aGame.verif()){
-			Random rand = new Random();
-			do {
-				aGame.roll(rand.nextInt(5) + 1);
-				Scanner sc = new Scanner(System.in);
-				System.out.println("Repondre 1 quitter 2");
-				 continuer = sc.next();
-				if(!continuer.equals("2")) {
-					if (rand.nextInt(9) == 7) {
-						if (!aGame.useJoker()) {
-							notAWinner = aGame.wrongAnswer();
+			if(aGame.verif()){
+				Random rand = new Random();
+				do {
+					aGame.roll(rand.nextInt(5) + 1);
+					Scanner sc = new Scanner(System.in);
+					System.out.println("Repondre 1 quitter 2");
+					continuer = sc.next();
+					if(!continuer.equals("2")) {
+						if (rand.nextInt(9) == 7) {
+							if (!aGame.useJoker()) {
+								notAWinner = aGame.wrongAnswer();
+							}
+						} else {
+							notAWinner = aGame.wasCorrectlyAnswered();
 						}
-					} else {
-						notAWinner = aGame.wasCorrectlyAnswered();
+					}else{
+						notAWinner = aGame.leave();
 					}
-				}else{
-					notAWinner = aGame.leave();
-				}
-			} while (notAWinner);
-		}else{
-			System.out.println("Number of player is not correct");
-		}*/
+				} while (notAWinner);
+			}else{
+				System.out.println("Number of player is not correct");
+			}
+		}
 		
 	}
 }
