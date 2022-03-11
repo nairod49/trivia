@@ -102,7 +102,17 @@ public class Game {
 
 			System.out.println("nb turn : " + players.get(currentPlayer).nbTurnInJail);
 
-			int rollPenaltyBox = rand.nextInt(players.get(currentPlayer).nbTurnInJail) + 1;
+
+			double limitRandom = players.get(currentPlayer).nbTurnInJail * (players.get(currentPlayer).nbTurnInJailConsecutive * 10.0 / 100.0);
+			double start = 0;
+			double end = limitRandom;
+			double random = new Random().nextDouble();
+			double rollPenaltyBox = start + (random * (end - start));
+			System.out.println("limitRandom : " + limitRandom);
+			System.out.println("rollPenaltyBox : " + rollPenaltyBox);
+
+			//double rollPenaltyBox = rand.nextDouble(limitRandom) + 1.0;
+
 
 			System.out.println("roll : " + rollPenaltyBox);
 
@@ -123,6 +133,8 @@ public class Game {
 				System.out.println(players.get(currentPlayer).getName() + " is not getting out of the penalty box");
 				isGettingOutOfPenaltyBox = false;
 				players.get(currentPlayer).getNbTurnInJail();
+				players.get(currentPlayer).getNbTurnInJailConsecutive();
+
 				}
 			
 		} else {
@@ -208,6 +220,7 @@ public class Game {
 		System.out.println(players.get(currentPlayer).getName()+ " was sent to the penalty box");
 
 		players.get(currentPlayer).getNbTurnInJail();
+		players.get(currentPlayer).getNbTurnInJailConsecutive();
 
 		inPenaltyBox[currentPlayer] = true;
 		this.gold = 0;

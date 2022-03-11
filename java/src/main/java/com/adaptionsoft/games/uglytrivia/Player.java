@@ -6,7 +6,8 @@ public class Player {
     private int score;
     private int totalScore;
     public int nbCorrectAnswerConsecutive = 0;
-    public int nbTurnInJail = 0;
+    public double nbTurnInJail = 0.0;
+    public double nbTurnInJailConsecutive = 0.0;
 
 
     public Player(String name, String pseudo, int age, int score){
@@ -62,8 +63,12 @@ public class Player {
         return this.nbCorrectAnswerConsecutive;
     }
 
-    public int getNbTurnInJail() {
+    public double getNbTurnInJail() {
         this.nbTurnInJail++;
         return this.nbTurnInJail;
+    }
+    public double getNbTurnInJailConsecutive() {
+        this.nbTurnInJailConsecutive++;
+        return this.nbTurnInJailConsecutive;
     }
 }
